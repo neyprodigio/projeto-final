@@ -11,7 +11,7 @@ interface Iprovider {
     children: ReactNode
 }
 
-interface Ilogin {
+export interface Ilogin {
     email: string
     password: string
 }

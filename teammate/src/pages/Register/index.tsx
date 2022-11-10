@@ -8,6 +8,7 @@ import { registerSchema } from './registerSchema';
 import { StyledErrors } from '../../styles/errors';
 import {useState} from 'react'
 import api from '../../services/api';
+import { useNavigate } from 'react-router-dom';
 
 const Register = () => {
     const [load, setLoad] = useState(false)
@@ -15,11 +16,14 @@ const Register = () => {
         resolver: yupResolver(registerSchema)
     })
 
+    const navigate = useNavigate()
+
     const submit = async (data:Iregister) => {
         try {
             setLoad(true)
             const response = await api.post('/register', data)
             console.log(response.data)
+            navigate('/')
         } catch (error) {
             console.log(error)
         } finally{

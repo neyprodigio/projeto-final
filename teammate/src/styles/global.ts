@@ -37,11 +37,11 @@ export const GlobalStyle = createGlobalStyle`
         --white: #ffffff;
     }
     body{
-      
+     
     }
     h1, h2, h3, h4, h5, h6, p, span, li, a{
       font-family: 'Roboto', sans-serif;
-      color: var(--white);
+      color: var(--green2);
     }
     
     .Toastify__toast-theme--dark{
