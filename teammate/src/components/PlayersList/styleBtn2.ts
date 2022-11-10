@@ -1,14 +1,11 @@
 import styled from "styled-components";
 
-export const StyledBtn = styled.button `
-    width:100%;
+export const StyledBtn2 = styled.span `
+    width: 100%;
     height: 25px;
 
-    margin-bottom: 15px;
-
     color: black;
- 
-    font-size: 1.5rem;
+
     text-align: center;
 
         :hover {
@@ -17,8 +14,8 @@ export const StyledBtn = styled.button `
  
 
     svg {
-        height: 36px;
-        width: 40px;
+        height: 25px;
+        width: 25px;
 
     }
 `

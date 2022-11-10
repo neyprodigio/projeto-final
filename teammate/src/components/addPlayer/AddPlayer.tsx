@@ -19,7 +19,6 @@ const AddPlayer = () => {
     }
   
     const submit = (data:Idata) => {
-        console.log(data)
         createPlayer(data.name)
     }
     

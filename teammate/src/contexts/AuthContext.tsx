@@ -44,6 +44,7 @@ export const AuthProvider = ({children}:Iprovider) => {
         .catch(error => console.log(error))
     }
 
+
     return(
         <AuthContext.Provider value={{user}}>
             {children}
