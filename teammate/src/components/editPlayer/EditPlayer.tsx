@@ -24,8 +24,8 @@ const EditPlayer = () => {
     };
     return (
         <StyledAddForm onSubmit={handleSubmit(submit)}>
-            <button type="button" onClick={() => openModal2()}>
-                <FaRegWindowClose />
+            <button  type="button" onClick={() => openModal2()}>
+                <FaRegWindowClose style={{border:'none'}} />
             </button>
             <h1>Editar nome</h1>
             <StyledInput
