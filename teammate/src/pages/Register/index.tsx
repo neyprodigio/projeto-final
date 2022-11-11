@@ -1,36 +1,24 @@
 import {useForm} from 'react-hook-form'
-import { Iregister } from '../../contexts/AuthContext';
+import { AuthContext, Iregister } from '../../contexts/AuthContext';
 import { StyledButton } from "../../styles/button";
 import { StyledForm } from "../../styles/form";
 import { StyledInput } from "../../styles/input";
 import {yupResolver} from '@hookform/resolvers/yup'
 import { registerSchema } from './registerSchema';
 import { StyledErrors } from '../../styles/errors';
-import {useState} from 'react'
-import api from '../../services/api';
-import { useNavigate } from 'react-router-dom';
+import {useContext, useState} from 'react'
 
 const Register = () => {
+    const {userRegister} = useContext(AuthContext)
     const [load, setLoad] = useState(false)
     const {register, handleSubmit, formState: {errors}} = useForm<Iregister>({
         resolver: yupResolver(registerSchema)
     })
 
-    const navigate = useNavigate()
-
     const submit = async (data:Iregister) => {
-        try {
-            setLoad(true)
-            const response = await api.post('/register', data)
-            console.log(response.data)
-            navigate('/')
-        } catch (error) {
-            console.log(error)
-        } finally{
-            setLoad(false)
-        }
- 
+        userRegister(data,setLoad)
     }
+        
     return (
         <StyledForm onSubmit={handleSubmit(submit)}>
             <h1>Registro</h1>

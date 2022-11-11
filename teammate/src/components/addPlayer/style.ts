@@ -19,6 +19,7 @@ export const StyledAddForm = styled.form`
     border-radius: 6px;
 
     background-color: var(--green5);
+    box-shadow:10px 10px 50px 100px var(--green4);
 
     margin: auto;
     margin-top: 70px;
