@@ -8,6 +8,9 @@ import { useContext, useState } from "react";
 import { loginSchema } from "./loginSchema";
 import { AuthContext, Ilogin } from "../../contexts/AuthContext";
 import { PlayerContext } from "../../contexts/playersContext";
+import {motion} from 'framer-motion'
+import Lottie from "lottie-react";
+import frango from '../../assets/frango.json'
 
 const Login = () => {
     const { userLogin } = useContext(AuthContext);
@@ -26,7 +29,14 @@ const Login = () => {
     };
 
     return (
-        <StyledForm onSubmit={handleSubmit(submit)}>
+        <motion.div
+        initial={{x:2000}}
+        animate={{x:0}}
+        transition={{duration:1}}
+        style={{width:'100vw', height:'100%'}}
+        >
+            <StyledForm onSubmit={handleSubmit(submit)}>
+            <Lottie className="frango" animationData={frango}></Lottie>
             <h1>Login</h1>
             <StyledInput
                 type="email"
@@ -52,6 +62,7 @@ const Login = () => {
                 {loading ? "Entrando..." : "Entrar"}
             </StyledButton>
         </StyledForm>
+        </motion.div>
     );
 };
 

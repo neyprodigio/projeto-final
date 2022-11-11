@@ -18,7 +18,7 @@ interface Iprovider {
 interface Icontext {
     delPlayer: (value: number) => void;
     createPlayer: (name: string) => void;
-    editPlayer: (name: string, id: number) => void;
+    editPlayer: (name: string) => void;
     player: Iplayers[];
     setPlayers: (values: any) => void;
     exit: () => void;
@@ -29,10 +29,13 @@ interface Icontext {
     token: string | null;
     navigate: NavigateFunction;
     goRegister: () => void;
+    editId: number
+    setEditId: (value:number) => void
 }
 
 export const PlayerProvider = ({ children }: Iprovider) => {
     const [player, setPlayers] = useState([]);
+    const [editId, setEditId] = useState(0) 
     useEffect(() => {
         api.get("/players")
             .then((res) => setPlayers(res.data))
@@ -70,10 +73,9 @@ export const PlayerProvider = ({ children }: Iprovider) => {
             .then((res) => openModal());
     };
 
-    const editPlayer = async (name: String, id: number): Promise<void | any> => {
-        console.log(userIdd)
-        api.patch(
-            `/players/${id}`,
+    const editPlayer = async (name: String): Promise<void | any> => {
+        axios.patch(
+            `https://api-footv5.herokuapp.com/players/${editId}`,
             {
                 name: name,
                 userId: userIdd,
@@ -122,6 +124,8 @@ export const PlayerProvider = ({ children }: Iprovider) => {
                 token,
                 navigate,
                 goRegister,
+                editId,
+                setEditId
             }}
         >
             {children}

@@ -43,9 +43,8 @@ export const GlobalStyle = createGlobalStyle`
       font-family: 'Roboto', sans-serif;
       color: var(--green2);
     }
-    
-    .Toastify__toast-theme--dark{
-      background: var(--green2);
-      border: 1px solid var(--green1);
+    .frango {
+      width: 100px;
+      height: 100px;
     }
 `;

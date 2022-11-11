@@ -17,10 +17,10 @@ const EditPlayer = () => {
         name: string;
         id: number;
     }
-    console.log(player)
+
     const submit = (data: Idata) => {
         console.log(data);
-        editPlayer(data.name, data.id);
+        editPlayer(data.name);
     };
     return (
         <StyledAddForm onSubmit={handleSubmit(submit)}>

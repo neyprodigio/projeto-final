@@ -37,7 +37,9 @@ export const AuthProvider = ({children}:Iprovider) => {
             localStorage.setItem("@team-token", response.data.accessToken)
             localStorage.setItem("@team-user", JSON.stringify(response.data.user.id))
             navigate('/dashboard')
-            toast('Sucesso')
+            toast.success('Sucesso', {
+                theme: 'colored'
+            })
             
         } catch (error) {
             console.log(error)
@@ -49,7 +51,7 @@ export const AuthProvider = ({children}:Iprovider) => {
                 pauseOnHover: true,
                 draggable: true,
                 progress: undefined,
-                theme: 'dark',
+                theme: 'colored',
             });
         } finally {
             setLoading(false)
@@ -62,6 +64,7 @@ export const AuthProvider = ({children}:Iprovider) => {
             const response = await api.post('/register', data)
             console.log(response.data)
             navigate('/')
+            toast.success('Sucesso')
         } catch (error) {
             console.log(error)
         } finally{
