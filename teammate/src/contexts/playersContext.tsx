@@ -18,17 +18,17 @@ interface Iprovider {
 interface Icontext {
     delPlayer: (value: number) => void;
     createPlayer: (name: string) => void;
-    editPlayer: (name: string, userIdd: number) => void;
+    editPlayer: (name: string, id: number) => void;
     player: Iplayers[];
     setPlayers: (values: any) => void;
     exit: () => void;
     openModal: () => void;
     openModal2: () => void;
     isOpen: boolean;
-    Open: boolean
-    token: string | null
-    navigate: NavigateFunction
-    goRegister: () => void
+    Open: boolean;
+    token: string | null;
+    navigate: NavigateFunction;
+    goRegister: () => void;
 }
 
 export const PlayerProvider = ({ children }: Iprovider) => {
@@ -53,23 +53,6 @@ export const PlayerProvider = ({ children }: Iprovider) => {
     };
 
     const createPlayer = async (name: String): Promise<void | any> => {
-        // try {
-        //     const userIdd = localStorage.getItem("@team-user");
-        //     console.log(userIdd);
-        //     const response = await api.post(`/players`, {
-        //         headers: {
-        //             "Content-Type": "application/json",
-        //             Authorization: `Bearer ${token}`,
-        //         },
-        //         name: name,
-        //         userId: userIdd,
-        //     });
-        //     console.log(response);
-        //     return response;
-        // } catch (error) {
-        //     console.log(error);
-        // }
-
         axios
             .post(
                 "https://api-footv5.herokuapp.com/players",
@@ -87,21 +70,21 @@ export const PlayerProvider = ({ children }: Iprovider) => {
             .then((res) => openModal());
     };
 
-    const editPlayer = async (
-        name: String,
-        id: number
-    ): Promise<void | any> => {
-        try {
-            const response = await api.patch(`/players/${id}`, {
-                headers: { Authorization: `Bearer ${token}` },
+    const editPlayer = async (name: String, id: number): Promise<void | any> => {
+        console.log(userIdd)
+        api.patch(
+            `/players/${id}`,
+            {
                 name: name,
-                id: id,
-            });
-            console.log(response);
-            return response;
-        } catch (response_1) {
-            return console.log(response_1);
-        }
+                userId: userIdd,
+            },
+            {
+                headers: {
+                    "Content-Type": "application/json",
+                    Authorization: `Bearer ${token}`,
+                },
+            }
+        ).then((res) => openModal2());
     };
 
     const navigate = useNavigate();
@@ -116,12 +99,11 @@ export const PlayerProvider = ({ children }: Iprovider) => {
         setIsOpen(!isOpen);
     };
     const openModal2 = (): void => {
-        setOpen(!Open)
-
-    }
+        setOpen(!Open);
+    };
 
     const goRegister = (): void => {
-        return navigate('/register', { replace: true });
+        return navigate("/register", { replace: true });
     };
 
     return (
@@ -139,7 +121,7 @@ export const PlayerProvider = ({ children }: Iprovider) => {
                 createPlayer,
                 token,
                 navigate,
-                goRegister
+                goRegister,
             }}
         >
             {children}

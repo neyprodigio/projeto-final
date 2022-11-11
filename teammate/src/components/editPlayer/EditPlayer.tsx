@@ -7,7 +7,7 @@ import { FaRegWindowClose } from "react-icons/fa";
 import { useForm } from "react-hook-form";
 
 const EditPlayer = () => {
-    const { openModal, editPlayer, openModal2 } = useContext(PlayerContext);
+    const {editPlayer, openModal2, player } = useContext(PlayerContext);
     const {
         register,
         handleSubmit,
@@ -17,7 +17,7 @@ const EditPlayer = () => {
         name: string;
         id: number;
     }
-
+    console.log(player)
     const submit = (data: Idata) => {
         console.log(data);
         editPlayer(data.name, data.id);

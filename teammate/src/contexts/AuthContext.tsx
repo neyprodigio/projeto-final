@@ -1,6 +1,7 @@
 import { createContext, ReactNode, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../services/api";
+import { toast } from 'react-toastify';
 
 
 export const AuthContext = createContext({} as Icontext)
@@ -36,9 +37,20 @@ export const AuthProvider = ({children}:Iprovider) => {
             localStorage.setItem("@team-token", response.data.accessToken)
             localStorage.setItem("@team-user", JSON.stringify(response.data.user.id))
             navigate('/dashboard')
+            toast('Sucesso')
             
         } catch (error) {
             console.log(error)
+            toast.error('🦄 Erro!', {
+                position: 'bottom-left',
+                autoClose: 1000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'dark',
+            });
         } finally {
             setLoading(false)
         }
