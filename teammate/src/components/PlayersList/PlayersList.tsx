@@ -1,14 +1,12 @@
-import { StyledPlayerList } from "./style";
 import { PlayerContext } from "../../contexts/playersContext";
 import { useContext, useEffect, useState } from "react";
 import { TbUser } from "react-icons/tb";
 import { GrUserAdd } from "react-icons/gr";
-import { StyledBtn } from "./stylebtn";
 import { AiFillEdit } from "react-icons/ai";
 import AddPlayer from "../addPlayer/AddPlayer";
-import { StyledBtn2 } from "./styleBtn2";
 import EditPlayer from "../editPlayer/EditPlayer";
 import { motion } from "framer-motion";
+import "./newStyle.css";
 const PlayerList = () => {
     const {
         openModal,
@@ -21,20 +19,19 @@ const PlayerList = () => {
     } = useContext(PlayerContext);
     const [random, setRandom] = useState(0);
     useEffect(() => {
-        function getRandom(min: any, max: any) {
-            return parseInt(Math.random() * (max - min) + min);
+        function getRandom(min: number, max: number) {
+            return Math.floor(Math.random() * (max - min) + min);
         }
         setRandom(getRandom(1, 6));
     }, [random]);
 
     return (
         <>
-            <StyledBtn onClick={() => openModal()}>
-                {" "}
+            <button className="add-player-btn" onClick={() => openModal()}>
                 Adicionar Jogador <GrUserAdd />
-            </StyledBtn>
+            </button>
             {isOpen === true && <AddPlayer />}
-            <StyledPlayerList>
+            <ul className="player-list">
                 {player.map((player) => (
                     <motion.li
                         key={player.id}
@@ -53,24 +50,32 @@ const PlayerList = () => {
                             },
                         }}
                     >
-                        <h2>{player.name}</h2>
-                        <StyledBtn2
+                        <h2 className="player-name">{player.name}</h2>
+                        <button
+                            className="edit-player-btn"
                             onClick={() => {
                                 setEditId(player.id);
                                 openModal2();
                             }}
                         >
                             <AiFillEdit />
-                        </StyledBtn2>
+                        </button>
                         {Open === true && <EditPlayer />}
                         <TbUser />
-                        {random === player.id ? <p>Goleiro</p> : <p>Linha</p>}
-                        <button onClick={() => delPlayer(player.id)}>
+                        {random === player.id ? (
+                            <p className="goalkeeper">Goleiro</p>
+                        ) : (
+                            <p className="line-player">Linha</p>
+                        )}
+                        <button
+                            className="remove-player-btn"
+                            onClick={() => delPlayer(player.id)}
+                        >
                             Remover
                         </button>
                     </motion.li>
                 ))}
-            </StyledPlayerList>
+            </ul>
         </>
     );
 };

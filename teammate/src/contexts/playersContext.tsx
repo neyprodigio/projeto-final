@@ -46,21 +46,22 @@ export const PlayerProvider = ({ children }: Iprovider) => {
     const token = localStorage.getItem("@team-token");
     const delPlayer = async (id: number): Promise<void> => {
         try {
-            const response = await api.delete(`/players/${id}`, {
+            await api.delete(`/players/${id}`, {
                 headers: { Authorization: `Bearer ${token}` },
+        
             });
-            return console.log(response);
-        } catch (response_1) {
-            return console.log(response_1);
+            console.log(`Jogador com id ${id} foi deletado com sucesso`);
+        } catch (error) {
+            console.error(error);
         }
     };
 
     const createPlayer = async (name: String): Promise<void | any> => {
-        axios
-            .post(
-                "https://api-footv5.herokuapp.com/players",
+        try {
+            const response = await axios.post(
+                "https://footapi.onrender.com/players",
                 {
-                    name: name,
+                    name,
                     userId: userIdd,
                 },
                 {
@@ -69,25 +70,35 @@ export const PlayerProvider = ({ children }: Iprovider) => {
                         Authorization: `Bearer ${token}`,
                     },
                 }
-            )
-            .then((res) => openModal());
+            );
+            openModal();
+        } catch (error) {
+            console.error(error);
+        }
     };
+    
 
     const editPlayer = async (name: String): Promise<void | any> => {
-        axios.patch(
-            `https://api-footv5.herokuapp.com/players/${editId}`,
-            {
-                name: name,
-                userId: userIdd,
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                    Authorization: `Bearer ${token}`,
+        try {
+            const response = await axios.patch(
+                `https://footapi.onrender.com/players/${editId}`,
+                {
+                    name,
+                    userId: userIdd,
                 },
-            }
-        ).then((res) => openModal2());
+                {
+                    headers: {
+                        "Content-Type": "application/json",
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            );
+            openModal2();
+        } catch (error) {
+            console.error(error);
+        }
     };
+    
 
     const navigate = useNavigate();
     const exit = (): void => {

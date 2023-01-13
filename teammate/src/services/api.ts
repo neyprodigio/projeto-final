@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const api = axios.create({
-    baseURL: 'https://api-footv5.herokuapp.com',
+    baseURL: 'https://footapi.onrender.com',
     timeout: 10000
 })
 
